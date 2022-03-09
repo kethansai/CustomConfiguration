@@ -1,0 +1,111 @@
+<div class="m-0 p-0">
+  <div class="text-center text-white text-lg font-bold p-4 bg-blue-400 shadow-xl shadow-blue-400/30">
+    Update Field Configurations
+  </div>
+  <div class="text-center mt-3">
+    A simple tool which allows you to compare field configuration and update
+    fields accordingly.
+    <p class="text-red-500" *ngIf="message !== ''">*{{ message }}</p>
+  </div>
+  <div class="w-5/6 p-4 mt-4 m-auto">
+    <div class="flex items-center justify-center">
+      <select
+        class="px-6 py-2 text-sm transition-colors duration-300 rounded rounded-full shadow-xl text-stone-100 bg-stone-500 hover:bg-stone-600 shadow-stone-400/30"
+        (change)="addCard($event)"
+      >
+        <option value="" selected>ADD CORPORATION</option>
+        <option *ngFor="let corp of corporation" value="{{ corp }}">
+          {{ corp }}
+        </option>
+      </select>
+    </div>
+    <div
+      class="grid justify-items-center p-4 mt-4"
+      [ngClass]="container.length > 2 ? 'lg:grid-cols-3 sm:grid-cols-1 gap-20 md:grid-cols-2' : 'lg:grid-cols-2 gap-x-80 sm:grid-cols-1 md:grid-cols-2'"
+    >
+      <div class="min-w-full lg:max-w-9/12" *ngFor="let data of container; let i = index">
+        <div
+          *ngIf="data.CORP"
+          class="min-w-full rounded shadow-md shadow-indigo-600"
+        >
+          <button
+            (click)="delete(i)"
+            style="float: right; color: red;"
+            class="p-2"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
+          <div class="p-4">
+            <div class="my-2">
+              <h2 class="text-m font-bold text-grey-600 text-center mb-2">
+                {{ data.CORP }}
+              </h2>
+              <h4 class="text-xs font-bold text-grey-600 mb-2">
+                Private Label
+              </h4>
+              <div>
+                <select
+                  name="corp"
+                  id="corp1"
+                  (change)="setPL($event, i)"
+                  class="w-5/6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                >
+                  <option value="">Please select PrivateLabelID</option>
+                  <option value="corp1">sample 1</option>
+                  <option value="corp2">sample 2</option>
+                  <option value="corp3">sample 3</option>
+                  <option value="corp4">sample 4</option>
+                </select>
+              </div>
+            </div>
+            <div class="my-4">
+              <h4 class="text-xs font-bold text-grey-600">Entity/Track</h4>
+              <div>
+                <select
+                  name="corp"
+                  id="corp1"
+                  (change)="setEntity($event, i)"
+                  class="w-5/6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                >
+                  <option value="">Please select Entity</option>
+                  <option value="pvt1">sample 1</option>
+                  <option value="pvt2">sample 2</option>
+                  <option value="pvt3">sample 3</option>
+                  <option value="pvt4">sample 4</option>
+                </select>
+              </div>
+            </div>
+            <div class="my-4">
+              <h4 class="text-xs font-bold text-grey-600">Field List</h4>
+              <div>
+                <select
+                  name="corp"
+                  id="corp1"
+                  (change)="setField($event, i)"
+                  class="w-5/6 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                >
+                  <option value="">Please select Field</option>
+                  <option value="entity1">sample 1</option>
+                  <option value="entity2">sample 2</option>
+                  <option value="entity3">sample 3</option>
+                  <option value="entity4">sample 4</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-center">
+      <div
+        *ngIf="container.length > 1"
+        class="px-6 py-2 w-40 text-sm transition-colors duration-300 rounded rounded-full shadow-xl text-emerald-100 bg-emerald-500 hover:bg-emerald-600 shadow-emerald-400"
+        (click)="compare()"
+      >
+        COMPARE FIELDS
+      </div>
+    </div>
+    
+  </div>
+</div>
